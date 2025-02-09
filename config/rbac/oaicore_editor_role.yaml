@@ -1,0 +1,31 @@
+# permissions for end users to edit oaicores.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: oaicore-editor-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: openai-operator
+    app.kubernetes.io/part-of: openai-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: oaicore-editor-role
+rules:
+- apiGroups:
+  - oai.openai.com
+  resources:
+  - oaicores
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - oai.openai.com
+  resources:
+  - oaicores/status
+  verbs:
+  - get

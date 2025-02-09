@@ -1,0 +1,19 @@
+apiVersion: oai.openai.com/v1
+kind: OaiCore
+metadata:
+  name: oaicore-sample
+  namespace: default
+spec:
+  components:
+    AMF:
+      image: oaisoftwarealliance/oai-amf:latest
+      replicas: 1
+    NRF:
+      image: oaisoftwarealliance/oai-nrf:latest
+      replicas: 1
+    SMF:
+      image: oaisoftwarealliance/oai-smf:latest
+      replicas: 1
+    UPF:
+      image: oaisoftwarealliance/oai-upf:latest
+      replicas: 1

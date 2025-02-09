@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oai-nrf
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oai-nrf
+  template:
+    metadata:
+      labels:
+        app: oai-nrf
+    spec:
+      containers:
+      - name: oai-nrf
+        image: oaisoftwarealliance/oai-nrf:latest
+        ports:
+        - containerPort: 80

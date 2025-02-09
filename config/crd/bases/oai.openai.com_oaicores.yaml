@@ -1,0 +1,103 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.11.1
+  creationTimestamp: null
+  name: oaicores.oai.openai.com
+spec:
+  group: oai.openai.com
+  names:
+    kind: OaiCore
+    listKind: OaiCoreList
+    plural: oaicores
+    singular: oaicore
+  scope: Namespaced
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        description: OaiCore est la définition principale de la ressource
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: OaiCoreSpec définit la configuration souhaitée pour OaiCore
+            properties:
+              amf:
+                description: AMFSpec définit la configuration pour l'AMF
+                properties:
+                  image:
+                    type: string
+                  replicas:
+                    format: int32
+                    type: integer
+                required:
+                - image
+                - replicas
+                type: object
+              nrf:
+                description: NRFSpec définit la configuration pour le NRF
+                properties:
+                  image:
+                    type: string
+                  replicas:
+                    format: int32
+                    type: integer
+                required:
+                - image
+                - replicas
+                type: object
+              smf:
+                description: SMFSpec définit la configuration pour le SMF
+                properties:
+                  image:
+                    type: string
+                  replicas:
+                    format: int32
+                    type: integer
+                required:
+                - image
+                - replicas
+                type: object
+              upf:
+                description: UPFSpec définit la configuration pour l'UPF
+                properties:
+                  image:
+                    type: string
+                  replicas:
+                    format: int32
+                    type: integer
+                required:
+                - image
+                - replicas
+                type: object
+            type: object
+          status:
+            description: OaiCoreStatus définit l'état observé de OaiCore
+            properties:
+              amfReady:
+                type: boolean
+              nrfReady:
+                type: boolean
+              smfReady:
+                type: boolean
+              upfReady:
+                type: boolean
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

@@ -1,0 +1,4 @@
+## Append samples you want in your CSV to this file as resources ##
+resources:
+- oai_v1_oaicore.yaml
+#+kubebuilder:scaffold:manifestskustomizesamples
