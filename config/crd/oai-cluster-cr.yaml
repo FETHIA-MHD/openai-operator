@@ -1,0 +1,13 @@
+apiVersion: oai.com/v1
+kind: OAICluster
+metadata:
+  name: oai-core
+spec:
+  amf:
+    replicaCount: 1
+  smf:
+    replicaCount: 1
+  upf:
+    replicaCount: 1
+  nrf:
+    replicaCount: 1

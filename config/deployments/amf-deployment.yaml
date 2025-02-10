@@ -14,15 +14,19 @@ spec:
         app: amf
     spec:
       containers:
-      - name: amf
-        image: openairinterface/amf:latest
-        ports:
-          - containerPort: 38412  # Port SCTP pour l'AMF
-        volumeMounts:
-          - name: amf-config-volume
-            mountPath: /openair-amf/config/amf-config.yaml  # Chemin dans le conteneur
-            subPath: amf-config.yaml  # Nom du fichier monté
-      volumes:
-        - name: amf-config-volume
-          configMap:
-            name: amf-config  # Le nom du ConfigMap créé précédemment
+        - name: amf-container
+          image: oaisoftwarealliance/oai-amf:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 5
