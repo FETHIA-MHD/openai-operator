@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: upf-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: upf
+  template:
+    metadata:
+      labels:
+        app: upf
+    spec:
+      containers:
+      - name: upf
+        image: openairinterface/upf:latest
+        ports:
+          - containerPort: 38414  # Port SCTP pour le UPF
+        volumeMounts:
+          - name: upf-config-volume
+            mountPath: /openair-upf/config/upf-config.yaml  # Chemin dans le conteneur
+            subPath: upf-config.yaml  # Nom du fichier monté
+      volumes:
+        - name: upf-config-volume
+          configMap:
+            name: upf-config  # Le nom du ConfigMap créé précédemment

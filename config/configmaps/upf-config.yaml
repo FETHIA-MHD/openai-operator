@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: upf-config
+  namespace: default
+data:
+  upf-config.yaml: |
+    nrf:
+      ip: 10.0.0.1
+    upf:
+      interface: eth0
+      pfcp:
+        ip: 10.0.0.4
+      gtpu:
+        ip: 10.0.0.4
+      dnn:
+        - name: "internet"
+          subnet: "10.45.0.0/16"

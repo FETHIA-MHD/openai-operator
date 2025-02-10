@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: smf-config
+  namespace: default
+data:
+  smf-config.yaml: |
+    nrf:
+      ip: 10.0.0.1
+    smf:
+      interface: eth0
+      dnn:
+        - name: "internet"
+          apn: "internet"
+      pfcp:
+        ip: 10.0.0.3
+      user_plane:
+        upf_ip: 10.0.0.4

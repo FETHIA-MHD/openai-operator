@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nrf-config
+  namespace: default
+data:
+  nrf-config.yaml: |
+    nrf:
+      interface:
+        ip: 10.0.0.1
+        port: 29510
+      database:
+        type: mongodb
+        uri: mongodb://nrf-db:27017

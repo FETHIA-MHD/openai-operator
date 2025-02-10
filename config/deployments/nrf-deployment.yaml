@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nrf-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nrf
+  template:
+    metadata:
+      labels:
+        app: nrf
+    spec:
+      containers:
+      - name: nrf
+        image: openairinterface/nrf:latest
+        ports:
+          - containerPort: 38415  # Port SCTP pour le NRF
+        volumeMounts:
+          - name: nrf-config-volume
+            mountPath: /openair-nrf/config/nrf-config.yaml  # Chemin dans le conteneur
+            subPath: nrf-config.yaml  # Nom du fichier monté
+      volumes:
+        - name: nrf-config-volume
+          configMap:
+            name: nrf-config  # Le nom du ConfigMap créé précédemment
