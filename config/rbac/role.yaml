@@ -18,9 +18,17 @@ rules:
   - update
   - watch
 - apiGroups:
-  - oai.openai.com
+  - ""
   resources:
-  - oaicores
+  - pods
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - oai.com
+  resources:
+  - oaiclusters
   verbs:
   - create
   - delete
@@ -30,15 +38,9 @@ rules:
   - update
   - watch
 - apiGroups:
-  - oai.openai.com
+  - oai.com
   resources:
-  - oaicores/finalizers
-  verbs:
-  - update
-- apiGroups:
-  - oai.openai.com
-  resources:
-  - oaicores/status
+  - oaiclusters/status
   verbs:
   - get
   - patch

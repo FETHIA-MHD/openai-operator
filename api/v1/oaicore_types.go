@@ -4,67 +4,59 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// OaiCoreSpec définit la configuration souhaitée pour OaiCore
-type OaiCoreSpec struct {
-	AMF AMFSpec `json:"amf,omitempty"`
-	SMF SMFSpec `json:"smf,omitempty"`
-	UPF UPFSpec `json:"upf,omitempty"`
-	NRF NRFSpec `json:"nrf,omitempty"`
+// OAIClusterSpec defines the desired state of OAICluster
+type OAIClusterSpec struct {
+	AMF AMFSpec `json:"amf"`
+	SMF SMFSpec `json:"smf"`
+	UPF UPFSpec `json:"upf"`
+	NRF NRFSpec `json:"nrf"`
 }
 
-// AMFSpec définit la configuration pour l'AMF
 type AMFSpec struct {
-	Replicas int32  `json:"replicas"`
-	Image    string `json:"image"`
+	ReplicaCount int32 `json:"replicaCount"`
 }
 
-// SMFSpec définit la configuration pour le SMF
 type SMFSpec struct {
-	Replicas int32  `json:"replicas"`
-	Image    string `json:"image"`
+	ReplicaCount int32 `json:"replicaCount"`
 }
 
-// UPFSpec définit la configuration pour l'UPF
 type UPFSpec struct {
-	Replicas int32  `json:"replicas"`
-	Image    string `json:"image"`
+	ReplicaCount int32 `json:"replicaCount"`
 }
 
-// NRFSpec définit la configuration pour le NRF
 type NRFSpec struct {
-	Replicas int32  `json:"replicas"`
-	Image    string `json:"image"`
+	ReplicaCount int32 `json:"replicaCount"`
 }
 
-// OaiCoreStatus définit l'état observé de OaiCore
-type OaiCoreStatus struct {
-	AMFReady bool `json:"amfReady,omitempty"`
-	SMFReady bool `json:"smfReady,omitempty"`
-	UPFReady bool `json:"upfReady,omitempty"`
-	NRFReady bool `json:"nrfReady,omitempty"`
+// OAIClusterStatus defines the observed state of OAICluster
+type OAIClusterStatus struct {
+	AMFReady bool `json:"amfReady"`
+	SMFReady bool `json:"smfReady"`
+	UPFReady bool `json:"upfReady"`
+	NRFReady bool `json:"nrfReady"`
 }
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// OaiCore est la définition principale de la ressource
-type OaiCore struct {
+// OAICluster is the Schema for the oaiclusters API
+type OAICluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   OaiCoreSpec   `json:"spec,omitempty"`
-	Status OaiCoreStatus `json:"status,omitempty"`
+	Spec   OAIClusterSpec   `json:"spec,omitempty"`
+	Status OAIClusterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// OaiCoreList contient une liste de ressources OaiCore
-type OaiCoreList struct {
+// OAIClusterList contains a list of OAICluster
+type OAIClusterList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []OaiCore `json:"items"`
+	Items           []OAICluster `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&OaiCore{}, &OaiCoreList{})
+	SchemeBuilder.Register(&OAICluster{}, &OAIClusterList{})
 }

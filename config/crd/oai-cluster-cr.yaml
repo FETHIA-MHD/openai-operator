@@ -1,7 +1,8 @@
 apiVersion: oai.com/v1
 kind: OAICluster
 metadata:
-  name: oai-core
+  name: example-oaicluster
+  namespace: default
 spec:
   amf:
     replicaCount: 1

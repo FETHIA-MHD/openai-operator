@@ -1,12 +1,12 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  name: oaiclusters.oai.com  # Utilisez le pluriel pour la ressource
+  name: oaiclusters.oai.com
 spec:
   group: oai.com
   names:
     kind: OAICluster
-    plural: oaiclusters  # Pluriel
+    plural: oaiclusters
     singular: oaicluster
     shortNames:
       - oai
@@ -28,21 +28,33 @@ spec:
                     replicaCount:
                       type: integer
                       default: 1
+                    image:  # Ajoutez ce champ
+                      type: string
+                      default: "oaisoftwarealliance/oai-amf:latest"
                 smf:
                   type: object
                   properties:
                     replicaCount:
                       type: integer
                       default: 1
+                    image:  # Ajoutez ce champ
+                      type: string
+                      default: "oaisoftwarealliance/oai-smf:latest"
                 upf:
                   type: object
                   properties:
                     replicaCount:
                       type: integer
                       default: 1
+                    image:  # Ajoutez ce champ
+                      type: string
+                      default: "oaisoftwarealliance/oai-upf:latest"
                 nrf:
                   type: object
                   properties:
                     replicaCount:
                       type: integer
                       default: 1
+                    image:  # Ajoutez ce champ
+                      type: string
+                      default: "oaisoftwarealliance/oai-nrf:latest"
